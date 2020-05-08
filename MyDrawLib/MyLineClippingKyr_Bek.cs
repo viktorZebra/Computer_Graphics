@@ -37,6 +37,7 @@ namespace MyDrawLib
                     float D_sc;
                     float W_sc;
 
+                    bool breakFlag = false;
                     for (int i = 0; i < Cutter.Count; i++)
                     {
                         w = new Vector(LinesArray[j], Cutter[i]);
@@ -46,7 +47,10 @@ namespace MyDrawLib
                         if (D_sc == 0) // отрезок выродился в точку / D и сторона парралельны
                         {
                             if (W_sc < 0)
+                            {
+                                breakFlag = true;
                                 break;
+                            }
                             // точка видима относительно текущей границы
                         }
                         else
@@ -55,23 +59,36 @@ namespace MyDrawLib
                             if (D_sc > 0) // поиск нижнего предела
                             {
                                 if (t_tmp > 1)
+                                {
+                                    breakFlag = true;
                                     break;
+                                }
                                 t_down = Math.Max(t_down, t_tmp);
                             }
                             else // поиск верхнего предела
                             {
                                 if (t_tmp < 0)
+                                {
+                                    breakFlag = true;
                                     break;
+                                }
                                 t_up = Math.Min(t_up, t_tmp);
                             }
                         }
                     }
 
                     if (t_down > t_up)
+                    {
+                        breakFlag = true;
                         break;
+                    }
 
-                    currLines.Add(GetDot(t_down, LinesArray[j], LinesArray[j + 1]));
-                    currLines.Add(GetDot(t_up, LinesArray[j], LinesArray[j + 1]));
+                    if (!breakFlag)
+                    {
+                        currLines.Add(GetDot(t_down, LinesArray[j], LinesArray[j + 1]));
+                        currLines.Add(GetDot(t_up, LinesArray[j], LinesArray[j + 1]));
+
+                    }
                 }
             }
             else
