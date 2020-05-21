@@ -48,8 +48,10 @@
     <Compile Include="MyLine.cs" />
     <Compile Include="MyLineClipping.cs" />
     <Compile Include="MyLineClippingKyr_Bek.cs" />
+    <Compile Include="MyPolygonClippingSaz_Hod.cs" />
     <Compile Include="MySeedPolygon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Segment.cs" />
     <Compile Include="Vector.cs" />
   </ItemGroup>
   <ItemGroup>

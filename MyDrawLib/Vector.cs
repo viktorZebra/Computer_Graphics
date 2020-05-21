@@ -33,5 +33,12 @@ namespace MyDrawLib
         {
             return a.x * b.x + a.y * b.y + a.z * b.z;
         }
+
+        public static bool VisibleVertex(PointF vertex, PointF p1, Vector norm)
+        {
+            Vector v1 = new Vector(vertex, p1);
+            float mult = ScalarMultiplication(v1, norm);
+            return mult > 0;
+        }
     }
 }
